@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,48 +19,68 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4b-WV-UD0">
-                                <rect key="frame" x="141" y="28" width="133" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Restaurant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4b-WV-UD0">
+                                <rect key="frame" x="121" y="28" width="133" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the restaurant name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7PF-Pq-wUk">
-                                <rect key="frame" x="48" y="57" width="319" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the restaurant name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7PF-Pq-wUk">
+                                <rect key="frame" x="44" y="57" width="287" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l82-2o-pqT">
-                                <rect key="frame" x="132" y="95" width="151" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l82-2o-pqT">
+                                <rect key="frame" x="112" y="95" width="151" height="30"/>
                                 <state key="normal" title="Set Default Label Text"/>
                                 <connections>
                                     <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lzJ-3R-kg4"/>
                                 </connections>
                             </button>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="fMc-2x-g4h">
+                                <rect key="frame" x="77" y="133" width="220" height="220"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="v2b-dE-qwg" appends="YES" id="r6h-ti-iqh"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="a4b-WV-UD0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="G3E-vq-vsJ"/>
-                            <constraint firstItem="7PF-Pq-wUk" firstAttribute="top" secondItem="a4b-WV-UD0" secondAttribute="bottom" constant="8" symbolic="YES" id="GfZ-8t-vjm"/>
-                            <constraint firstItem="l82-2o-pqT" firstAttribute="top" secondItem="7PF-Pq-wUk" secondAttribute="bottom" constant="8" symbolic="YES" id="OSA-1k-gaA"/>
-                            <constraint firstItem="7PF-Pq-wUk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="28" id="RvC-1p-6xE"/>
-                            <constraint firstItem="7PF-Pq-wUk" firstAttribute="centerX" secondItem="l82-2o-pqT" secondAttribute="centerX" id="ltU-Zy-5Ne"/>
-                            <constraint firstItem="a4b-WV-UD0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="mHi-mX-grG"/>
-                            <constraint firstItem="a4b-WV-UD0" firstAttribute="centerX" secondItem="7PF-Pq-wUk" secondAttribute="centerX" id="zKu-3T-Hsx"/>
+                            <constraint firstItem="fMc-2x-g4h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="61" id="2c9-UR-Ywk"/>
+                            <constraint firstItem="l82-2o-pqT" firstAttribute="top" secondItem="7PF-Pq-wUk" secondAttribute="bottom" constant="8" symbolic="YES" id="7uA-C9-dfs"/>
+                            <constraint firstItem="a4b-WV-UD0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="BqJ-Lg-i3s"/>
+                            <constraint firstItem="fMc-2x-g4h" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KQP-Dr-ZDi"/>
+                            <constraint firstItem="7PF-Pq-wUk" firstAttribute="centerX" secondItem="l82-2o-pqT" secondAttribute="centerX" id="O2g-9j-GLg"/>
+                            <constraint firstItem="7PF-Pq-wUk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="28" id="p7V-cc-b3k"/>
+                            <constraint firstItem="fMc-2x-g4h" firstAttribute="top" secondItem="l82-2o-pqT" secondAttribute="bottom" constant="8" symbolic="YES" id="rXc-4k-mmu"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fMc-2x-g4h" secondAttribute="bottom" constant="314" id="tst-x9-bou"/>
+                            <constraint firstItem="l82-2o-pqT" firstAttribute="centerX" secondItem="fMc-2x-g4h" secondAttribute="centerX" id="xKn-UM-med"/>
+                            <constraint firstItem="7PF-Pq-wUk" firstAttribute="top" secondItem="a4b-WV-UD0" secondAttribute="bottom" constant="8" symbolic="YES" id="yb5-8r-OGs"/>
+                            <constraint firstItem="a4b-WV-UD0" firstAttribute="centerX" secondItem="7PF-Pq-wUk" secondAttribute="centerX" id="z90-Xd-0GH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imgRestaurant" destination="fMc-2x-g4h" id="Hcn-fv-l31"/>
                         <outlet property="lblRestName" destination="a4b-WV-UD0" id="FXH-K5-MRT"/>
                         <outlet property="txtRestName" destination="7PF-Pq-wUk" id="MfL-ek-Ij4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="v2b-dE-qwg">
+                    <connections>
+                        <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="qwC-47-OsE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="defaultPhoto" width="540" height="540"/>
+    </resources>
 </document>
