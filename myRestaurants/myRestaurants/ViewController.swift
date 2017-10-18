@@ -8,30 +8,49 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
 
     //MARK: Properties
     @IBOutlet weak var lblRestName: UILabel!
     @IBOutlet weak var txtRestName: UITextField!
     @IBOutlet weak var imgRestaurant: UIImageView!
+    @IBOutlet weak var txtAddress: UITextField!
+    @IBOutlet weak var txtComment: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         txtRestName.delegate = self
+        txtAddress.delegate = self
+        txtComment.delegate = self
+        
+        //Setting the text view's border
+        self.txtComment.layer.borderColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1).cgColor
+        self.txtComment.layer.borderWidth = 0.5
+        self.txtComment.layer.cornerRadius = 5
     }
     
     //MARK: Text Delegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //Hide the keyboard
-        txtRestName.resignFirstResponder()
+        textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         lblRestName.text = txtRestName.text
+    }
+    
+    //Dismiss the text view keyboard, when the user types "Done"
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" //Recognizes enter key in keyboard
+        {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
     
     //MARK: Image View Delegate
@@ -63,6 +82,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         //Hide the keyboard
         txtRestName.resignFirstResponder()
+        txtAddress.resignFirstResponder()
+        txtComment.resignFirstResponder()
         
         //Creating the image picker controller
         let imagePickerController = UIImagePickerController()
