@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
-
     //MARK: Properties
     @IBOutlet weak var lblRestName: UILabel!
     @IBOutlet weak var txtRestName: UITextField!
@@ -96,5 +95,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         present(imagePickerController, animated: true, completion: nil)
     }
 
+    //MARK: Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case "goToBreakfast":
+            print(">>>>>>>>>>>>>>>>>>> Breakfast")
+        case "goToLunch":
+            print(">>>>>>>>>>>>>>>>>>> Lunch")
+        case "goToDinner":
+            print(">>>>>>>>>>>>>>>>>>> Dinner")
+        default:
+            print("Unknown")
+        }
+    }
+    
+    @IBAction func backToRestaurant(unwindSegue: UIStoryboardSegue) {
+        print(">>>>>>>>>>>>>>>>>>> I'm back!")
+    }
 }
 
