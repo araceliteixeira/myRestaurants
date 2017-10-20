@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MealViewController.swift
 //  myRestaurants
 //
 //  Created by MacStudent on 2017-10-18.
