@@ -74,6 +74,23 @@ class RestaurantTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of RestaurantTableViewCell")
         }
     }
+    
+    //MARK: Actions
+    @IBAction func unwindToRestaurantList(sender: UIStoryboardSegue) {
+        //test if the sender is the ViewController, and if there is a restaurant created
+        if let sourceViewController = sender.source as? ViewController {
+            if let newRestaurant = sourceViewController.restaurant {
+                //where the new restaurant must be added
+                let newIndexPath = IndexPath(row: data.count, section: 0)
+                
+                //adding the restaurant to the array
+                data.append(newRestaurant)
+                
+                //adding the new element tto the TableView
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        }
+    }
  
 
     /*

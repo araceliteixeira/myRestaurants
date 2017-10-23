@@ -7,16 +7,25 @@
 //
 
 import UIKit
+import os.log
 
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
     //MARK: Properties
-    @IBOutlet weak var lblRestName: UILabel!
     @IBOutlet weak var txtRestName: UITextField!
     @IBOutlet weak var imgRestaurant: UIImageView!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var txtComment: UITextView!
-
+    
+    @IBOutlet weak var rateLocation: RatingControl!
+    @IBOutlet weak var rateService: RatingControl!
+    @IBOutlet weak var rateCleaning: RatingControl!
+    @IBOutlet weak var rateTotal: RatingControl!
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    var restaurant: Restaurant?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,6 +37,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.txtComment.layer.borderColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1).cgColor
         self.txtComment.layer.borderWidth = 0.5
         self.txtComment.layer.cornerRadius = 5
+        
+        updateSaveButtonState()
     }
     
     //MARK: Text Delegate
@@ -39,7 +50,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        lblRestName.text = txtRestName.text
+        updateSaveButtonState()
+        navigationItem.title = textField.text!
     }
     
     //Dismiss the text view keyboard, when the user types "Done"
@@ -50,6 +62,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             return false
         }
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        //Disable the Save button while editing
+        if textField == txtRestName {
+            saveButton.isEnabled = false
+        }
+    }
+    
+    //MARK: Private Methods
+    
+    private func updateSaveButtonState() {
+        //Disable the Save button if the textfield is empty
+        if let text = txtRestName.text {
+            saveButton.isEnabled = !text.isEmpty
+        }
     }
     
     //MARK: Image View Delegate
@@ -74,10 +102,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     //MARK: Actions
     
-    @IBAction func setDefaultLabelText(_ sender: UIButton) {
-        lblRestName.text = "Default Name"
-    }
-    
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         //Hide the keyboard
         txtRestName.resignFirstResponder()
@@ -95,18 +119,48 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         present(imagePickerController, animated: true, completion: nil)
     }
 
+    @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier! {
-        case "goToBreakfast":
-            print(">>>>>>>>>>>>>>>>>>> Breakfast")
-        case "goToLunch":
-            print(">>>>>>>>>>>>>>>>>>> Lunch")
-        case "goToDinner":
-            print(">>>>>>>>>>>>>>>>>>> Dinner")
-        default:
-            print("Unknown")
+        super.prepare(for: segue, sender: sender)
+        
+        //Configure the destination view controller only when the save button is pressed
+        if let button = sender as? UIBarButtonItem {
+            if button === saveButton {
+                //retrieving the screen data
+                let name = txtRestName.text
+                let image = imgRestaurant.image
+                let address = txtAddress.text
+                let comment = txtComment.text
+                let location = rateLocation.rating
+                let service = rateService.rating
+                let cleaning = rateCleaning.rating
+                let total = rateTotal.rating
+                
+                //testing if the restaurant's name and ratings are not nil
+                if !(name?.isEmpty)! {
+                    restaurant = Restaurant(name: name!, image: image, address: address, comment: comment, location: location, attendance: service, cleaning: cleaning, total: total, breakfast: nil, lunch: nil, dinner: nil)
+                } else {
+                    //print the message on debug log
+                    os_log("Restaurant do not have a name", log: OSLog.default, type: .debug)
+                }
+            }
+            
+        } else {
+            switch segue.identifier! {
+            case "goToBreakfast":
+                print(">>>>>>>>>>>>>>>>>>> Breakfast")
+            case "goToLunch":
+                print(">>>>>>>>>>>>>>>>>>> Lunch")
+            case "goToDinner":
+                print(">>>>>>>>>>>>>>>>>>> Dinner")
+            default:
+                print("Unknown")
+            }
         }
     }
     
