@@ -38,6 +38,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.txtComment.layer.borderWidth = 0.5
         self.txtComment.layer.cornerRadius = 5
         
+        //Set up views if editing an existing Meal
+        if let existRestaurant = restaurant {
+            navigationItem.title = existRestaurant.name
+            txtRestName.text = existRestaurant.name
+            imgRestaurant.image = existRestaurant.image
+            txtAddress.text = existRestaurant.address
+            txtComment.text = existRestaurant.comment
+            rateLocation.rating = existRestaurant.rateLocation
+            rateService.rating = existRestaurant.rateAttendance
+            rateCleaning.rating = existRestaurant.rateCleaning
+            rateTotal.rating = existRestaurant.rateTotal
+        }
+        
         updateSaveButtonState()
     }
     
@@ -120,7 +133,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
 
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        //Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways
+        let isPresentingInAddRestaurantMode = presentingViewController is UINavigationController
+	
+        if isPresentingInAddRestaurantMode {
+            dismiss(animated: true, completion: nil)
+        }
+        // if its not a modal presentation, we must test if it is a push presentation
+        else if let owningNavigationController = navigationController {
+            owningNavigationController.popViewController(animated: true)
+        }
+        else {
+           fatalError("The MealViewController is not inside a navigation controller.")
+        }
     }
     
     //MARK: Segue
